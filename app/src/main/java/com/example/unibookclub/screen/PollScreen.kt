@@ -23,7 +23,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.unibookclub.R
-
+import com.example.unibookclub.components.Header
+import com.example.unibookclub.components.Footer
 
 @Composable
 fun PollScreen(navController: NavHostController) {
@@ -144,14 +145,4 @@ fun SubmitButton() {
             modifier = Modifier.padding(23.dp, 0.dp)
         )
     }
-}
-
-@Composable
-fun Footer() {
-    Spacer(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(127.dp)
-            .background(Color(0xFF09E832))
-    )
 }

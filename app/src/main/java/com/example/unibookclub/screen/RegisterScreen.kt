@@ -17,7 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -26,7 +25,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.unibookclub.R
+import com.example.unibookclub.components.Header
+import com.example.unibookclub.components.Footer
 
 
 @Composable
@@ -38,44 +38,10 @@ fun RegisterScreen(navController : NavHostController) {
     ) {
         Header()
         JoinClubContent()
+        Footer()
     }
 }
 
-@Composable
-fun Header() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color(0xFF09E832))
-            .padding(14.dp, 25.dp, 14.dp, 5.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.logo),
-            contentDescription = "Logo",
-            modifier = Modifier.size(77.dp)
-        )
-        Text(
-            text = "TUS",
-            color = Color.White,
-            fontSize = 77.sp,
-            fontWeight = FontWeight.Normal
-        )
-        Column(
-            verticalArrangement = Arrangement.spacedBy(14.dp)
-        ) {
-            repeat(3) {
-                Box(
-                    modifier = Modifier
-                        .width(50.dp)
-                        .height(5.dp)
-                        .background(Color.White)
-                )
-            }
-        }
-    }
-}
 
 @Composable
 fun JoinClubContent() {
@@ -172,5 +138,6 @@ fun FormField(
             visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
             keyboardOptions = KeyboardOptions(keyboardType = if (isPassword) KeyboardType.Password else KeyboardType.Text)
         )
+
     }
 }

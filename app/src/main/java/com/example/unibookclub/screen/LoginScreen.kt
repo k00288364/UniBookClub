@@ -1,11 +1,9 @@
 package com.example.unibookclub.screen
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
@@ -15,13 +13,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.unibookclub.R
-
+import com.example.unibookclub.components.Header
+import com.example.unibookclub.components.Footer
 
 @Composable
 fun LoginScreen(navController : NavHostController) {
@@ -44,42 +41,6 @@ fun LoginScreen(navController : NavHostController) {
     }
 }
 
-@Composable
-fun Header() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color(0xFF09E832))
-            .padding(vertical = 14.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.logo),
-            contentDescription = "Logo",
-            modifier = Modifier.size(77.dp)
-        )
-        Text(
-            text = "TUS",
-            color = Color.White,
-            fontSize = 77.sp,
-            fontWeight = FontWeight.Normal
-        )
-        Column(
-            modifier = Modifier.width(80.dp)
-        ) {
-            repeat(3) {
-                Spacer(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(5.dp)
-                        .background(Color.White)
-                )
-                if (it < 2) Spacer(modifier = Modifier.height(15.dp))
-            }
-        }
-    }
-}
 
 @Composable
 fun LoginForm() {
@@ -139,14 +100,4 @@ fun LoginForm() {
             modifier = Modifier.clickable { }
         )
     }
-}
-
-@Composable
-fun Footer(modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(127.dp)
-            .background(Color(0xFF09E832))
-    )
 }
