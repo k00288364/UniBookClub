@@ -26,5 +26,12 @@ class OfflineEventsRepository(private val eventDao: EventDao) : EventsRepository
     override fun getEventStream(id: Int): Flow<Event?> = eventDao.getEvent(id)
 
     override suspend fun insertEvent(event: com.example.inventory.data.Event) = eventDao.insert(event)
+    override suspend fun deleteEvent(event: Event) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun updateEvent(event: Event) {
+        TODO("Not yet implemented")
+    }
 
 }

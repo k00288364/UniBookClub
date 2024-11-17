@@ -1,35 +1,22 @@
 package com.example.inventory.ui.event
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Edit
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.inventory.BookClubTopAppBar
 import com.example.inventory.R
+import com.example.inventory.data.Event
 import com.example.inventory.ui.navigation.NavigationDestination
 import com.example.inventory.ui.theme.BookClubTheme
 
@@ -60,7 +47,6 @@ fun EventDetailsScreen(
                 onClick = { navigateToEditEvent(0) },
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large))
-
             ) {
                 Icon(
                     imageVector = Icons.Default.Edit,
@@ -91,9 +77,8 @@ private fun EventDetailsBody(
         modifier = modifier.padding(dimensionResource(id = R.dimen.padding_medium)),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
     ) {
-
         EventDetails(
-            event = eventDetailsUiState.eventDetails.toEvent(),
+            event = eventDetailsUiState.eventDetails,
             modifier = Modifier.fillMaxWidth()
         )
     }
@@ -101,7 +86,7 @@ private fun EventDetailsBody(
 
 @Composable
 fun EventDetails(
-    event: com.example.inventory.data.Event, modifier: Modifier = Modifier
+    event: Event, modifier: Modifier = Modifier
 ) {
     Card(
         modifier = modifier, colors = CardDefaults.cardColors(
@@ -118,35 +103,19 @@ fun EventDetails(
             EventDetailsRow(
                 labelResID = R.string.event,
                 eventDetail = event.bookname,
-                modifier = Modifier.padding(
-                    horizontal = dimensionResource(
-                        id = R.dimen
-                            .padding_medium
-                    )
-                )
+                modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_medium))
             )
             EventDetailsRow(
                 labelResID = R.string.location,
-                eventDetail = event.location.toString(),
-                modifier = Modifier.padding(
-                    horizontal = dimensionResource(
-                        id = R.dimen
-                            .padding_medium
-                    )
-                )
+                eventDetail = event.location,
+                modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_medium))
             )
             EventDetailsRow(
-                labelResID = R.string.location,
+                labelResID = R.string.date,
                 eventDetail = event.date,
-                modifier = Modifier.padding(
-                    horizontal = dimensionResource(
-                        id = R.dimen
-                            .padding_medium
-                    )
-                )
+                modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_medium))
             )
         }
-
     }
 }
 
@@ -161,16 +130,26 @@ private fun EventDetailsRow(
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun EventDetailsScreenPreview() {
     BookClubTheme {
         EventDetailsBody(
-            EventDetailsUiState(
-                meetUp = true,
-                eventDetails = EventDetails(1, "Call Of Cthulu", "TUS Library", "22-11-2024")
+            eventDetailsUiState = EventDetailsUiState(
+                eventDetails = Event(1, "Call Of Cthulu", "TUS Library", "22-11-2024")
             )
         )
     }
 }
+
+data class EventDetailsUiState(
+    val eventDetails: Event = Event(0, "", "", ""),
+    val meetUp: Boolean = false
+)
+
+data class Event(
+    val id: Int,
+    val bookname: String,
+    val location: String,
+    val date: String
+)

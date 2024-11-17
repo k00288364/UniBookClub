@@ -48,6 +48,7 @@
     <string name="save">Save</string>
     <string name="no_event_description">Location, Book type</string>
     <string name="event_location">Location</string>
+    <string name="field_required">Required Field</string>
 
 
 </resources>
