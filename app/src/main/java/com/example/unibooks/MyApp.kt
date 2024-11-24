@@ -1,4 +1,5 @@
-package com.example.unibookclub
+package com.example.unibooks
+
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -12,13 +13,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDrawerState
-import androidx.navigation.compose.rememberNavController
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.unibookclub.navigation.DrawerContent
-import com.example.unibookclub.navigation.NavigationGraph
-import com.example.unibookclub.ui.theme.UniBookClubTheme
+import androidx.navigation.compose.rememberNavController
+import com.example.unibooks.ui.theme.UniBooksTheme
+import com.example.unibooks.navigation.DrawerContent
+import com.example.unibooks.navigation.NavigationGraph
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -42,7 +43,7 @@ fun MyApp() {
         Scaffold(
             topBar = {
                 TopAppBar(
-                    title = { Text("My 3 Page App") },
+                    title = { Text("Jetpack Compose!") },
                     navigationIcon = {
                         IconButton(onClick = {
                             coroutineScope.launch {
@@ -69,7 +70,7 @@ fun MyApp() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewMyApp() {
-    UniBookClubTheme {
+    UniBooksTheme {
         MyApp()
     }
 }

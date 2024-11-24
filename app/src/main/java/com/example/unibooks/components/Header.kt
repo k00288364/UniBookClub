@@ -1,4 +1,5 @@
-package com.example.unibookclub.components
+package com.example.unibooks.components
+
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -12,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.unibookclub.R
+import com.example.unibooks.R
 
 @Composable
 fun Header() {

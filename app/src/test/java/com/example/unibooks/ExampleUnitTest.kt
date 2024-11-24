@@ -1,4 +1,4 @@
-package com.example.unibookclub
+package com.example.unibooks
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.example.unibookclub.ui.theme
+package com.example.unibooks.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

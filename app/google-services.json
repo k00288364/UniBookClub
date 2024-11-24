@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "394174456481",
+    "project_id": "unibooks-2d25a",
+    "storage_bucket": "unibooks-2d25a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:394174456481:android:fad978f2544199b2ce46e0",
+        "android_client_info": {
+          "package_name": "com.example.unibooks"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD5cKYQAH7x7toXXGCR4UrUHFWSEBtm7-4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

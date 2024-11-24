@@ -1,17 +1,20 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android) version "1.9.20"
-    kotlin("kapt") // Apply the KAPT plugin for annotation processing
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.devtools.ksp)
+    alias(libs.plugins.compose.compiler)
+    id("com.google.gms.google-services")
+
 }
 
 android {
-    namespace = "com.example.unibookclub"
+    namespace = "com.example.unibooks"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.unibookclub"
+        applicationId = "com.example.unibooks"
         minSdk = 24
-        targetSdk = 35  // Align targetSdk with compileSdk
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -26,28 +29,23 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"  // Add rules for Room, if needed
+                "proguard-rules.pro"
             )
         }
     }
-
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
-
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "1.8"
     }
-
     buildFeatures {
         compose = true
     }
-
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.4"
     }
-
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -56,7 +54,6 @@ android {
 }
 
 dependencies {
-    // Standard AndroidX libraries
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -74,10 +71,24 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.androidx.navigation.compose)
 
-    // Room Database dependencies
-    val roomVersion = "2.5.0"
-    implementation("androidx.room:room-runtime:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion") // KAPT annotation processor
-    implementation("androidx.room:room-ktx:$roomVersion")
-    testImplementation("androidx.room:room-testing:$roomVersion")
+// Firebase dependencies using BOM
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.auth.ktx)
+// Firebase Authentication
+    implementation(libs.firebase.firestore.ktx)  // Firestore (if needed)
+
+// Room components
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+
+    // Firebase dependencies
+    implementation 'com.google.firebase:firebase-database:20.1.0'
+    implementation 'com.google.firebase:firebase-core:21.1.1'
+    // Optional for Firestore
+    implementation 'com.google.firebase:firebase-firestore:24.4.3'
+
+    // Other dependencies
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
 }

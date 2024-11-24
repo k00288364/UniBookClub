@@ -1,13 +1,12 @@
-package com.example.unibookclub.screen
+package com.example.unibooks.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.*
+import androidx.compose.material.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.*
@@ -22,12 +21,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
-import com.example.unibookclub.R
-import com.example.unibookclub.components.Header
-import com.example.unibookclub.components.Footer
+
+import com.example.unibooks.components.Header
+import com.example.unibooks.components.Footer
 
 @Composable
-fun PollScreen(navController: NavHostController) {
+fun PollingScreen(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -51,12 +50,12 @@ fun WhatNextSection() {
             .fillMaxWidth()
             .height(440.dp)
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.background),
-            contentDescription = null,
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
-        )
+//        Image(
+//            painter = painterResource(id = R.drawable.background),
+//            contentDescription = "Background Image",
+//            modifier = Modifier.fillMaxSize(),
+//            contentScale = ContentScale.Crop
+//        )
         Text(
             text = "What Next?",
             color = Color.Black,
@@ -90,8 +89,8 @@ fun BookButton(text: String) {
         modifier = Modifier
             .width(455.dp)
             .shadow(4.dp)
-            .background(Color(0xFFD9D9D9), RoundedCornerShape(10.dp)),
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFD9D9D9))
+            .background(Color(0xFFD9D9D9), RoundedCornerShape(10.dp))
+       // colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFD9D9D9))
     ) {
         Text(
             text = text,
@@ -134,8 +133,8 @@ fun SubmitButton() {
             .padding(top = 16.dp)
             .width(260.dp)
             .shadow(5.dp)
-            .background(Color(0xFF09E832), RoundedCornerShape(13.dp)),
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF09E832))
+            .background(Color(0xFF09E832), RoundedCornerShape(13.dp))
+        //colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF09E832))
     ) {
         Text(
             text = "Submit",

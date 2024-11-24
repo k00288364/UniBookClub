@@ -1,4 +1,4 @@
-package com.example.unibookclub.components
+package com.example.unibooks.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

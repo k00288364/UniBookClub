@@ -1,6 +1,4 @@
-package com.example.unibookclub.screen
-
-import androidx.navigation.NavHostController
+package com.example.unibooks
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -19,13 +17,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.unibookclub.components.Header
-import com.example.unibookclub.components.Footer
-import com.example.unibookclub.R
-
+import androidx.navigation.NavHostController
+import com.example.unibooks.components.Footer
+import com.example.unibooks.components.Header
 
 @Composable
-fun HomeScreen(navHostController: NavHostController) {
+fun HomeScreen(navController: NavHostController) {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -44,14 +41,7 @@ fun HomeScreen(navHostController: NavHostController) {
         ) {
             Header()
 
-            Image(
-                painter = painterResource(id = R.drawable.logo),
-                contentDescription = "Literary Lounge Image",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp),
-                contentScale = ContentScale.Crop
-            )
+
 
             Text(
                 text = "Literary Lounge",

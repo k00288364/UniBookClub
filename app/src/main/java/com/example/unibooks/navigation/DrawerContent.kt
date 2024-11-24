@@ -1,13 +1,10 @@
-package com.example.unibookclub.navigation
+package com.example.unibooks.navigation
 
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
-
 import androidx.compose.runtime.rememberCoroutineScope
-
 import kotlinx.coroutines.launch
-
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -21,7 +18,6 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState) {
     Column {
         Text("Navigate to:")
 
-        // Home item
         TextButton(onClick = {
             coroutineScope.launch {
                 drawerState.close()  // Close the drawer first
@@ -31,44 +27,40 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState) {
             Text("Home")
         }
 
-        // Profile item
         TextButton(onClick = {
             coroutineScope.launch {
                 drawerState.close()  // Close the drawer first
                 navController.navigate("login")  // Then navigate to profile
             }
         }) {
-            Text("login")
-        }
-
-        // Settings item
-        TextButton(onClick = {
-            coroutineScope.launch {
-                drawerState.close()  // Close the drawer first
-                navController.navigate("register")  // Then navigate to settings
-            }
-        }) {
-            Text("register")
-        }
-
-        // WidgetScreen item
-        TextButton(onClick = {
-            coroutineScope.launch {
-                drawerState.close()  // Close the drawer first
-                navController.navigate("events")  // Then navigate to settings
-            }
-        }) {
-            Text("events")
+            Text("Login")
         }
 
         TextButton(onClick = {
             coroutineScope.launch {
                 drawerState.close()  // Close the drawer first
-                navController.navigate("poll")  // Then navigate to settings
+                navController.navigate("registration")  // Then navigate to settings
             }
         }) {
-            Text("poll")
+            Text("Registration")
+        }
+
+        TextButton(onClick = {
+            coroutineScope.launch {
+                drawerState.close()  // Close the drawer first
+                navController.navigate("meetUps")  // Then navigate to settings
+            }
+        }) {
+            Text("MeetUps")
+        }
+
+        TextButton(onClick = {
+            coroutineScope.launch {
+                drawerState.close()  // Close the drawer first
+                navController.navigate("poll")  // Then navigate to profile
+            }
+        }) {
+            Text("Poll")
         }
     }
 }
-

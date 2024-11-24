@@ -19,5 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "UniBookClub"
+rootProject.name = "UniBooks"
 include(":app")
+ 
