@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "170368927346",
+    "project_id": "unibookclub2",
+    "storage_bucket": "unibookclub2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:170368927346:android:de6092f673b985fadae4eb",
+        "android_client_info": {
+          "package_name": "com.example.unibookclub2"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTUlv_dBFpKxwsUJUiHH64DL3vOqgOVFM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
