@@ -4,10 +4,14 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -20,42 +24,80 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-
 import com.example.unibooks.components.Header
 import com.example.unibooks.components.Footer
+import kotlinx.coroutines.coroutineScope
 
 @Composable
 fun MeetUpsScreen(navController: NavHostController) {
-    Column(
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
+    val coroutineScope = rememberCoroutineScope()
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Header()
-        Spacer(modifier = Modifier.height(215.dp))
-        Text(
-            text = "Meet-Ups",
-            fontSize = 56.sp,
-            fontFamily = androidx.compose.ui.text.font.FontFamily.Serif
-        )
-        Spacer(modifier = Modifier.height(20.dp))
-        MeetUpTable()
-        Spacer(modifier = Modifier.height(30.dp))
-        NextReadsButton()
-        Spacer(modifier = Modifier.height(20.dp))
-        Footer()
+        // Header item
+        item {
+            Header(drawerState = drawerState, coroutineScope = coroutineScope)
+        }
+
+        // Spacer before "Meet-Ups" title
+        item {
+            Spacer(modifier = Modifier.height(215.dp))
+        }
+
+        // "Meet-Ups" title
+        item {
+            Text(
+                text = "Meet-Ups",
+                fontSize = 56.sp,
+                fontFamily = androidx.compose.ui.text.font.FontFamily.Serif
+            )
+        }
+
+        // Spacer after title
+        item {
+            Spacer(modifier = Modifier.height(20.dp))
+        }
+
+        // MeetUpTable item
+        item {
+            MeetUpTable()
+        }
+
+        // Spacer before "Next Reads" button
+        item {
+            Spacer(modifier = Modifier.height(30.dp))
+        }
+
+        // NextReadsButton item
+        item {
+            NextReadsButton(navController = navController)
+        }
+
+        // Spacer after button
+        item {
+            Spacer(modifier = Modifier.height(20.dp))
+        }
+
+        // Footer item
+        item {
+            Footer()
+        }
     }
 }
-
 
 @Composable
 fun MeetUpTable() {
     Column(
         modifier = Modifier
-            .width(544.dp)
+            .width(400.dp)
+            .fillMaxWidth()
             .border(1.dp, Color.Black)
     ) {
+        // Table Header Row
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -67,15 +109,17 @@ fun MeetUpTable() {
             TableHeader("Location")
             TableHeader("Date")
         }
-        MeetUpRow("Romeo\nand\nJuliet", "TUS Library", "22/11/2024")
-        repeat(3) {
-            Spacer(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(100.dp)
-                    .background(Color(0xFFD9D9D9))
-                    .border(1.dp, Color.Black)
-            )
+
+        val meetups = listOf(
+            Triple("Romeo\nand\nJuliet", "TUS Library", "22/11/2024"),
+            Triple("The Great Gatsby", "Library A", "25/11/2024"),
+            Triple("1984", "Main Hall", "30/11/2024"),
+            Triple("Moby Dick", "Room 101", "05/12/2024")
+        )
+
+        // Dynamically generate rows for each meetup
+        meetups.forEach { meetup ->
+            MeetUpRow(meetup.first, meetup.second, meetup.third)
         }
     }
 }
@@ -120,9 +164,9 @@ fun MeetUpRow(book: String, location: String, date: String) {
 }
 
 @Composable
-fun NextReadsButton() {
+fun NextReadsButton(navController: NavHostController) {
     Button(
-        onClick = { /* TODO: Implement next reads action */ },
+        onClick = { navController.navigate("polling") },
         modifier = Modifier
             .width(324.dp)
             .height(72.dp)

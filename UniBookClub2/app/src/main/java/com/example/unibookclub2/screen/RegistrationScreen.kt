@@ -1,12 +1,15 @@
 package com.example.unibookclub2.screen
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -16,10 +19,15 @@ import androidx.navigation.compose.rememberNavController
 import com.example.unibooks.components.Header
 import com.example.unibooks.components.Footer
 import com.example.unibooks.components.RegistrationForm
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.example.unibookclub2.model.Users
+
 
 @Composable
 fun RegistrationScreen(navController: NavHostController) {
-    // Declare state for the registration form fields
+
     var name by remember { mutableStateOf("") }
     var location by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -27,39 +35,71 @@ fun RegistrationScreen(navController: NavHostController) {
     var confirmPassword by remember { mutableStateOf("") }
     var agreeToTerms by remember { mutableStateOf(false) }
 
-    // Form submission handler
-    val onSubmit: () -> Unit = {
-        // Validate the fields
-        if (name.isNotBlank() && location.isNotBlank() && email.isNotBlank() && password == confirmPassword && agreeToTerms) {
-            // Call your registration logic or API here
-            navController.navigate("Home")  // Navigate to Home after successful registration
-        } else {
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
+    val coroutineScope = rememberCoroutineScope()
 
+    val context = LocalContext.current
+    val auth = FirebaseAuth.getInstance()
+
+
+    val database: DatabaseReference = FirebaseDatabase.getInstance().reference
+
+    val onSubmit: () -> Unit = {
+
+        if (name.isNotBlank() && location.isNotBlank() && email.isNotBlank() && password == confirmPassword && agreeToTerms) {
+
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val userId = auth.currentUser?.uid
+
+
+                        if (userId != null) {
+                            val user = Users(name, location, email, password, confirmPassword)
+                            database.child("users").child(userId).setValue(user)
+                                .addOnSuccessListener {
+
+                                    navController.navigate("login")
+                                }
+                                .addOnFailureListener { e ->
+
+                                    Toast.makeText(context, "Failed to save data: ${e.message}", Toast.LENGTH_SHORT).show()
+                                }
+                        }
+                    } else {
+                        Toast.makeText(context, "Registration failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+        } else {
+            // Show validation error (Optional)
+            Toast.makeText(context, "Please fill all fields correctly.", Toast.LENGTH_SHORT).show()
         }
     }
 
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
     ) {
-        Header()
-        JoinClubContent(
-            name = name,
-            location = location,
-            email = email,
-            password = password,
-            confirmPassword = confirmPassword,
-            agreeToTerms = agreeToTerms,
-            onNameChange = { name = it },
-            onLocationChange = { location = it },
-            onEmailChange = { email = it },
-            onPasswordChange = { password = it },
-            onConfirmPasswordChange = { confirmPassword = it },
-            onAgreeToTermsChange = { agreeToTerms = it },
-            onSubmit = onSubmit
-        )
-        Footer()
+        item { Header(drawerState = drawerState, coroutineScope = coroutineScope) }
+        item {
+            JoinClubContent(
+                name = name,
+                location = location,
+                email = email,
+                password = password,
+                confirmPassword = confirmPassword,
+                agreeToTerms = agreeToTerms,
+                onNameChange = { name = it },
+                onLocationChange = { location = it },
+                onEmailChange = { email = it },
+                onPasswordChange = { password = it },
+                onConfirmPasswordChange = { confirmPassword = it },
+                onAgreeToTermsChange = { agreeToTerms = it },
+                onSubmit = onSubmit
+            )
+        }
+        item { Footer() }
     }
 }
 
@@ -94,7 +134,6 @@ fun JoinClubContent(
             modifier = Modifier.padding(bottom = 20.dp)
         )
 
-        // Pass down the form state and onSubmit function to the RegistrationForm
         RegistrationForm(
             name = name,
             location = location,
@@ -108,7 +147,7 @@ fun JoinClubContent(
             onPasswordChange = onPasswordChange,
             onConfirmPasswordChange = onConfirmPasswordChange,
             onAgreeToTermsChange = onAgreeToTermsChange,
-            onSubmit = onSubmit // Function for form submission
+            onSubmit = onSubmit
         )
     }
 }

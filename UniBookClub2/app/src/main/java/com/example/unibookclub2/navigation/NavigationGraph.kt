@@ -1,6 +1,6 @@
 package com.example.unibooks.navigation
 
-import PollingScreen
+
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.navigation.NavHostController
@@ -19,7 +19,7 @@ fun NavigationGraph(navController: NavHostController, paddingValues: PaddingValu
         composable("home") { HomeScreen(navController) }
         composable("login") { LoginScreen(navController) }
         composable("meetUps") { MeetUpsScreen(navController) }
-        composable("polls") { PollingScreen(navController) }
+        composable("polling") { PollingScreen(navController) }
         composable("registration") { RegistrationScreen(navController) }
 
     }

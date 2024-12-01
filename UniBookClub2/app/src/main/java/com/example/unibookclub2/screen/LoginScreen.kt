@@ -19,9 +19,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.unibooks.components.Header
 import com.example.unibooks.components.Footer
+import kotlinx.coroutines.coroutineScope
 
 @Composable
 fun LoginScreen(navController: NavHostController) {
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
+    val coroutineScope = rememberCoroutineScope()
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -32,8 +35,8 @@ fun LoginScreen(navController: NavHostController) {
                 .fillMaxWidth()
                 .padding(horizontal = 25.dp)
         ) {
-            Header()
-            LoginForm(navController = navController) // Pass the navController to LoginForm
+            Header(drawerState = drawerState, coroutineScope = coroutineScope)
+            LoginForm(navController = navController)
             Footer()
         }
     }

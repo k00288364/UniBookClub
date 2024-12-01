@@ -64,12 +64,17 @@ dependencies {
 
 
     implementation(platform("com.google.firebase:firebase-bom:33.5.1"))
+    implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
+    implementation("com.google.firebase:firebase-database")
+
 // Firebase dependencies using BOM
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth.ktx) // Firebase Authentication
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.androidx.ui.test.android)
+    implementation(libs.firebase.auth)
 
+    implementation ("com.google.firebase:firebase-auth:21.1.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -20,8 +20,8 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState) {
 
         TextButton(onClick = {
             coroutineScope.launch {
-                drawerState.close()  // Close the drawer first
-                navController.navigate("home")  // Then navigate to home
+                drawerState.close()  // Ensures drawer is closed as each page is loaded
+                navController.navigate("home")
             }
         }) {
             Text("Home")
@@ -29,8 +29,8 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState) {
 
         TextButton(onClick = {
             coroutineScope.launch {
-                drawerState.close()  // Close the drawer first
-                navController.navigate("login")  // Then navigate to profile
+                drawerState.close()
+                navController.navigate("login")
             }
         }) {
             Text("Login")
@@ -38,8 +38,8 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState) {
 
         TextButton(onClick = {
             coroutineScope.launch {
-                drawerState.close()  // Close the drawer first
-                navController.navigate("registration")  // Then navigate to settings
+                drawerState.close()
+                navController.navigate("registration")
             }
         }) {
             Text("Registration")
@@ -47,8 +47,8 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState) {
 
         TextButton(onClick = {
             coroutineScope.launch {
-                drawerState.close()  // Close the drawer first
-                navController.navigate("meetUps")  // Then navigate to settings
+                drawerState.close()
+                navController.navigate("meetUps")
             }
         }) {
             Text("MeetUps")
@@ -57,7 +57,7 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState) {
         TextButton(onClick = {
             coroutineScope.launch {
                 drawerState.close()  // Close the drawer first
-                navController.navigate("poll")  // Then navigate to profile
+                navController.navigate("polling")
             }
         }) {
             Text("Poll")
