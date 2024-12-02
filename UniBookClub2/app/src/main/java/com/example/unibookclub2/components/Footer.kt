@@ -11,6 +11,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun Footer() {
+
     Box(
         modifier = Modifier
             .fillMaxWidth()

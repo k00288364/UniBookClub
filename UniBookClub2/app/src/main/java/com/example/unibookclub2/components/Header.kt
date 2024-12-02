@@ -63,14 +63,6 @@ fun Header(drawerState: androidx.compose.material3.DrawerState, coroutineScope: 
 
         Spacer(modifier = Modifier.weight(1f))
 
-        Column {
-//            repeat(3) {
-//                Divider(
-//                    color = Color.White,
-//                    thickness = 5.dp,
-//                    modifier = Modifier.padding(vertical = 5.dp)
-//                )
-//            }
         }
     }
-}
+

@@ -15,7 +15,7 @@ import com.example.unibookclub2.screen.RegistrationScreen
 
 @Composable
 fun NavigationGraph(navController: NavHostController, paddingValues: PaddingValues) {
-    NavHost(navController, startDestination = "home") {
+    NavHost(navController, startDestination = "login") {
         composable("home") { HomeScreen(navController) }
         composable("login") { LoginScreen(navController) }
         composable("meetUps") { MeetUpsScreen(navController) }
