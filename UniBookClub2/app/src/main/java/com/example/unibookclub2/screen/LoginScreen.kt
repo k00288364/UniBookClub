@@ -19,7 +19,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.unibooks.components.Header
 import com.example.unibooks.components.Footer
-import kotlinx.coroutines.coroutineScope
 
 @Composable
 fun LoginScreen(navController: NavHostController) {
@@ -44,13 +43,13 @@ fun LoginScreen(navController: NavHostController) {
 
 @Composable
 fun LoginForm(navController: NavHostController) {
-    // Add mutable state for the text fields
+
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var errorMessage by remember { mutableStateOf<String?>(null) }
     var isLoading by remember { mutableStateOf(false) }
 
-    // Validation logic for email and password
+
     fun validateCredentials(): Boolean {
         if (email.isBlank() || password.isBlank()) {
             errorMessage = "Email and Password cannot be empty"
@@ -61,7 +60,7 @@ fun LoginForm(navController: NavHostController) {
             return false
         }
 
-        errorMessage = null // Clear the error message if credentials are valid
+        errorMessage = null
         return true
     }
 
@@ -73,15 +72,14 @@ fun LoginForm(navController: NavHostController) {
     ) {
         Text(
             text = "Welcome Back!",
-            fontSize = 63.sp,
+            fontSize = 43.sp,
             fontWeight = FontWeight.Bold
         )
         Spacer(modifier = Modifier.height(71.dp))
 
-        // Bind the email text field to the 'email' state
         OutlinedTextField(
             value = email,
-            onValueChange = { email = it }, // Update the state when text changes
+            onValueChange = { email = it },
             label = { Text("Email") },
             modifier = Modifier
                 .fillMaxWidth()
@@ -89,19 +87,19 @@ fun LoginForm(navController: NavHostController) {
         )
         Spacer(modifier = Modifier.height(18.dp))
 
-        // Bind the password text field to the 'password' state
+
         OutlinedTextField(
             value = password,
-            onValueChange = { password = it }, // Update the state when text changes
+            onValueChange = { password = it },
             label = { Text("Password") },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(76.dp),
-            visualTransformation = PasswordVisualTransformation() // Optional, to hide the password
+            visualTransformation = PasswordVisualTransformation()
         )
         Spacer(modifier = Modifier.height(30.dp))
 
-        // Show error message if validation fails
+
         if (errorMessage != null) {
             Text(
                 text = errorMessage!!,
@@ -116,10 +114,10 @@ fun LoginForm(navController: NavHostController) {
             onClick = {
                 isLoading = true
                 if (validateCredentials()) {
-                    // Simulate a login process (e.g., connect to your API or auth system)
-                    // After success, navigate to the MeetUpsScreen
+
+
                     isLoading = false
-                    navController.navigate("MeetUps") // Navigate to MeetUpsScreen
+                    navController.navigate("home")
                 } else {
                     isLoading = false
                 }
@@ -136,9 +134,35 @@ fun LoginForm(navController: NavHostController) {
                 fontSize = 20.sp
             )
         }
+        Spacer(modifier = Modifier.height(18.dp))
+
+        Button(
+            onClick = {
+                isLoading = true
+                if (validateCredentials()) {
+
+
+                    isLoading = false
+                    navController.navigate("home")
+                } else {
+                    isLoading = false
+                }
+            },
+            enabled = !isLoading,
+            modifier = Modifier
+                .width(304.dp)
+                .height(76.dp)
+                .shadow(4.dp, RoundedCornerShape(10.dp))
+        ) {
+            Text(
+                text = if (isLoading) "register" else "Register",
+                color = Color.White,
+                fontSize = 20.sp
+            )
+        }
         Spacer(modifier = Modifier.height(14.dp))
 
-        // Forgot password link
+
         Text(
             text = "Forgot Password?",
             fontSize = 13.sp,

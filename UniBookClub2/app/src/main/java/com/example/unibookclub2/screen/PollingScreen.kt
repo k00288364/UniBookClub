@@ -5,9 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -30,7 +28,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.unibooks.components.Header
 import com.example.unibooks.components.Footer
 import com.example.unibookclub2.R
-import kotlinx.coroutines.coroutineScope
 
 @Composable
 fun PollingScreen(navController: NavHostController) {
@@ -79,12 +76,12 @@ fun WhatNextSection() {
         Text(
             text = "What Next?",
             color = Color.Black,
-            fontSize = 56.sp,
+            fontSize = 43.sp,
             fontWeight = FontWeight.Normal,
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .align(Alignment.Center)
-                .padding(70.dp)
+                .padding(40.dp)
         )
     }
 }
@@ -156,7 +153,6 @@ fun SubmitButton(onSubmit:() -> Unit) {
             .width(260.dp)
             .shadow(5.dp)
             .background(Color(0xFF09E832), RoundedCornerShape(13.dp))
-        //colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF09E832))
     ) {
         Text(
             text = "Submit",

@@ -20,7 +20,7 @@ fun DrawerContent(navController: NavHostController, drawerState: DrawerState) {
 
         TextButton(onClick = {
             coroutineScope.launch {
-                drawerState.close()  // Ensures drawer is closed as each page is loaded
+                drawerState.close()
                 navController.navigate("home")
             }
         }) {

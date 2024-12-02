@@ -28,19 +28,21 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(navController: NavHostController) {
-    // Create drawer state and coroutine scope
+
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val coroutineScope = rememberCoroutineScope()
+
 
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet {
-                // Drawer content can go here if needed
-                Text("Drawer Content") // Placeholder or replace with your own drawer content
+
+                Text("Drawer Content")
             }
         }
-    ) {
+    )
+    {
         Box(
             modifier = Modifier.fillMaxSize()
         ) {
@@ -57,7 +59,7 @@ fun HomeScreen(navController: NavHostController) {
                     .background(Color(0x80FFFFFF)),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                // Pass drawerState and coroutineScope to Header
+
                 item { Header(drawerState = drawerState, coroutineScope = coroutineScope) }
 
                 item {
@@ -85,14 +87,14 @@ fun HomeScreen(navController: NavHostController) {
 
                 item {
                     Button(
-                        onClick = { navController.navigate("login") },
+                        onClick = { navController.navigate("meetUps") },
                         modifier = Modifier
                             .width(292.dp)
                             .padding(top = 33.dp)
                             .shadow(4.dp)
                     ) {
                         Text(
-                            text = "Login",
+                            text = "Meet Ups",
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color.White
@@ -102,14 +104,14 @@ fun HomeScreen(navController: NavHostController) {
 
                 item {
                     Button(
-                        onClick = { navController.navigate("registration") },
+                        onClick = { navController.navigate("polling") },
                         modifier = Modifier
                             .width(292.dp)
                             .padding(top = 17.dp)
                             .shadow(4.dp)
                     ) {
                         Text(
-                            text = "Register",
+                            text = "Polls",
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold,
                             color = Color.White

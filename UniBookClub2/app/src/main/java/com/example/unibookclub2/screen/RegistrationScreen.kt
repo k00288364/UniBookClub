@@ -126,10 +126,10 @@ fun JoinClubContent(
             .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Title/Heading
+
         Text(
             text = "Join The Club!",
-            fontSize = 63.sp,
+            fontSize = 43.sp,
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(bottom = 20.dp)
         )
